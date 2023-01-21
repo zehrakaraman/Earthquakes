@@ -10,6 +10,8 @@
 		FA2E8D5D297424AD00EB29DA /* QuakeSelectedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8D5C297424AD00EB29DA /* QuakeSelectedButton.swift */; };
 		FA2E8D5F297429F100EB29DA /* QuakeListViewController+SelectMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8D5E297429F100EB29DA /* QuakeListViewController+SelectMode.swift */; };
 		FA69A5F3297C0284008B2D73 /* QuakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA69A5F2297C0284008B2D73 /* QuakeError.swift */; };
+		FA69A5F7297C19C0008B2D73 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA69A5F6297C19C0008B2D73 /* TestData.swift */; };
+		FA69A5F9297C3277008B2D73 /* GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA69A5F8297C3277008B2D73 /* GeoJSON.swift */; };
 		FA7FBB002972FAC000C21316 /* QuakeListViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FBAFF2972FAC000C21316 /* QuakeListViewController+Actions.swift */; };
 		FAB8CFE02970020700180022 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8CFDF2970020700180022 /* AppDelegate.swift */; };
 		FAB8CFE22970020700180022 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8CFE12970020700180022 /* SceneDelegate.swift */; };
@@ -47,6 +49,8 @@
 		FA2E8D5C297424AD00EB29DA /* QuakeSelectedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuakeSelectedButton.swift; sourceTree = "<group>"; };
 		FA2E8D5E297429F100EB29DA /* QuakeListViewController+SelectMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuakeListViewController+SelectMode.swift"; sourceTree = "<group>"; };
 		FA69A5F2297C0284008B2D73 /* QuakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuakeError.swift; sourceTree = "<group>"; };
+		FA69A5F6297C19C0008B2D73 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		FA69A5F8297C3277008B2D73 /* GeoJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSON.swift; sourceTree = "<group>"; };
 		FA7FBAFF2972FAC000C21316 /* QuakeListViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuakeListViewController+Actions.swift"; sourceTree = "<group>"; };
 		FAB8CFDC2970020700180022 /* Earthquakes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earthquakes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB8CFDF2970020700180022 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				FAB8CFF62970020900180022 /* EarthquakesTests.swift */,
+				FA69A5F6297C19C0008B2D73 /* TestData.swift */,
 			);
 			path = EarthquakesTests;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				FAC1B97629706AFC00EF00FC /* Quake.swift */,
+				FA69A5F8297C3277008B2D73 /* GeoJSON.swift */,
 				FA69A5F2297C0284008B2D73 /* QuakeError.swift */,
 				FAC1B97829707F0100EF00FC /* Quake+Color.swift */,
 				FAFC7DB92972B64400D9F8D4 /* Date+Quake.swift */,
@@ -311,6 +317,7 @@
 				FAC1B97729706AFC00EF00FC /* Quake.swift in Sources */,
 				FAB8CFE02970020700180022 /* AppDelegate.swift in Sources */,
 				FAFC7DBA2972B64400D9F8D4 /* Date+Quake.swift in Sources */,
+				FA69A5F9297C3277008B2D73 /* GeoJSON.swift in Sources */,
 				FAB8CFE22970020700180022 /* SceneDelegate.swift in Sources */,
 				FA2E8D5F297429F100EB29DA /* QuakeListViewController+SelectMode.swift in Sources */,
 				FAC1B97929707F0100EF00FC /* Quake+Color.swift in Sources */,
@@ -325,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB8CFF72970020900180022 /* EarthquakesTests.swift in Sources */,
+				FA69A5F7297C19C0008B2D73 /* TestData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
