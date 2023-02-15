@@ -17,14 +17,12 @@ extension QuakeListViewController {
         selectQuake(with: id)
     }
     
-    @objc func didPressSelectAllButton() {
-        selectMode.toggle()
+    @objc func didPressSelectAllButton(_ sender: UIBarButtonItem) {
         let deselectAllButton = UIBarButtonItem(title: "Deselect All", style: .plain, target: self, action: #selector(didPressDeselectAllButton))
         navigationItem.leftBarButtonItem = deselectAllButton
     }
     
     @objc func didPressDeselectAllButton() {
-        selectMode.toggle()
         let selectAllButton = UIBarButtonItem(title: "Select All", style: .plain, target: self, action: #selector(didPressSelectAllButton))
         navigationItem.leftBarButtonItem = selectAllButton
     }

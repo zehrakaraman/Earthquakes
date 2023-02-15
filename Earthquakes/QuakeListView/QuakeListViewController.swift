@@ -13,7 +13,6 @@ class QuakeListViewController: UICollectionViewController {
     
     var dataSource: DataSource!
     var quakes: [Quake] = Quake.sampleData
-    var selectMode: SelectMode = .inactive
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,32 +23,43 @@ class QuakeListViewController: UICollectionViewController {
         let listLayout = listLayout()
         collectionView.collectionViewLayout = listLayout
         
-        let cellRegistration = UICollectionView.CellRegistration(handler: cellRegistrationHandler)
-        dataSource = DataSource(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, identifier: Quake.ID) in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
-        }
-    
-        navigationItem.rightBarButtonItem = editButtonItem
-        
-        updateSnapshot()
-        collectionView.dataSource = dataSource
+        prepareForViewing()
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if editing {
-//            prepareForEditing()
+            prepareForEditing()
         } else {
-            navigationItem.rightBarButtonItem = editButtonItem
-            navigationItem.leftBarButtonItem = nil
+            prepareForViewing()
         }
     }
     
     private func prepareForEditing() {
+        updateCellRegistration()
+        
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didCancelEdit))
         navigationItem.rightBarButtonItem = cancelButton
         let selectAllButton = UIBarButtonItem(title: "Select All", style: .plain, target: self, action: #selector(didPressSelectAllButton))
         navigationItem.leftBarButtonItem = selectAllButton
+        
+        updateSnapshot()
+    }
+    
+    private func prepareForViewing() {
+        updateCellRegistration()
+        
+        navigationItem.rightBarButtonItem = editButtonItem
+        navigationItem.leftBarButtonItem = nil
+        
+        updateSnapshot()
+    }
+    
+    private func updateCellRegistration() {
+        let cellRegistration = UICollectionView.CellRegistration(handler: cellRegistrationHandler)
+        dataSource = DataSource(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, identifier: Quake.ID) in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
+        }
     }
     
     private func listLayout() -> UICollectionViewCompositionalLayout {
@@ -57,11 +67,5 @@ class QuakeListViewController: UICollectionViewController {
         listConfiguration.showsSeparators = true
         listConfiguration.backgroundColor = .clear
         return UICollectionViewCompositionalLayout.list(using: listConfiguration)
-    }
-}
-
-extension QuakeListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 80)
     }
 }

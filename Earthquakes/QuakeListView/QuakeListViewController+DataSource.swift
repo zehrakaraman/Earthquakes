@@ -20,10 +20,9 @@ extension QuakeListViewController {
         contentConfiguration.secondaryTextProperties.color = .secondaryLabel
         cell.contentConfiguration = contentConfiguration
         
-        if isEditing {
-            var selectedButtonConfigufation = selectedButtonConfiguration(for: quake)
-            selectedButtonConfigufation.tintColor = .lightGray
-            cell.accessories = [.customView(configuration: selectedButtonConfigufation)]
+        if self.isEditing {
+            let selectedButtonConfiguration = selectedButtonConfiguration(for: quake)
+            cell.accessories = [.customView(configuration: selectedButtonConfiguration)]
         }
     }
     
@@ -31,9 +30,13 @@ extension QuakeListViewController {
         let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title3)
         let image = UIImage(systemName: "circle", withConfiguration: symbolConfiguration)
         let button = QuakeSelectedButton()
-        button.addTarget(self, action: #selector(didPressSelectedButton(_:)), for: .touchUpInside)
         button.id = quake.id
         button.setImage(image, for: .normal)
+        
+        UIView.animate(withDuration: 0.3) {
+            button.center.x += 80
+        }
+        
         return UICellAccessory.CustomViewConfiguration(customView: button, placement: .leading(displayed: .always))
     }
     
