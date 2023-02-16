@@ -21,20 +21,23 @@ extension QuakeListViewController {
         cell.contentConfiguration = contentConfiguration
         
         if self.isEditing {
-            let selectedButtonConfiguration = selectedButtonConfiguration(for: quake)
+            var selectedButtonConfiguration = selectedButtonConfiguration(for: quake)
+            selectedButtonConfiguration.tintColor = selectedQuakes.contains(where: { $0.id == quake.id }) ? .systemBlue : .systemGray2
             cell.accessories = [.customView(configuration: selectedButtonConfiguration)]
         }
     }
     
     private func selectedButtonConfiguration(for quake: Quake) -> UICellAccessory.CustomViewConfiguration {
-        let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title3)
-        let image = UIImage(systemName: "circle", withConfiguration: symbolConfiguration)
+        let symbolName = selectedQuakes.contains(where: { $0.id == quake.id }) ? "checkmark.circle.fill" : "circle"
+        let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title2)
+        let image = UIImage(systemName: symbolName, withConfiguration: symbolConfiguration)
         let button = QuakeSelectedButton()
         button.id = quake.id
         button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(didPressSelectedButton(_:)), for: .touchUpInside)
         
-        UIView.animate(withDuration: 0.3) {
-            button.center.x += 80
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            self?.view.layoutIfNeeded()
         }
         
         return UICellAccessory.CustomViewConfiguration(customView: button, placement: .leading(displayed: .always))
@@ -63,14 +66,27 @@ extension QuakeListViewController {
 //    }
     
     func selectQuake(with id: Quake.ID) {
-//        let quake = quake(for: id)
-        
+        if !selectedQuakes.contains(where: { $0.id ==  id }) {
+            let quake = quake(for: id)
+            let index = quakes.indexOfQuake(with: id)
+            selectedQuakes.append(quake)
+//            collectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        } else {
+            let index = selectedQuakes.indexOfQuake(with: id)
+            selectedQuakes.remove(at: index)
+//            collectionView.deselectItem(at: IndexPath(item: index, section: 0), animated: true)
+        }
+        updateSnapshot(reloading: [id])
     }
     
-    func updateSnapshot() {
+    func updateSnapshot(reloading idsThatChanged: [Quake.ID] = []) {
+        let ids = idsThatChanged.filter { id in quakes.contains(where: { $0.id == id })}
         var snapshot = Snapshot()
         snapshot.appendSections([0])
         snapshot.appendItems(quakes.map { $0.id })
+        if !ids.isEmpty {
+            snapshot.reloadItems(ids)
+        }
         dataSource.apply(snapshot)
     }
     

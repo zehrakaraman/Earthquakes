@@ -13,6 +13,7 @@ class QuakeListViewController: UICollectionViewController {
     
     var dataSource: DataSource!
     var quakes: [Quake] = Quake.sampleData
+    var selectedQuakes: [Quake] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,8 @@ class QuakeListViewController: UICollectionViewController {
         collectionView.collectionViewLayout = listLayout
         
         prepareForViewing()
+        
+        collectionView.dataSource = dataSource
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -33,6 +36,10 @@ class QuakeListViewController: UICollectionViewController {
         } else {
             prepareForViewing()
         }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return false
     }
     
     private func prepareForEditing() {
